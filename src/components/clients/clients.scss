@@ -1,0 +1,13 @@
+@import './../../vendor/mySlider/slider.scss';
+
+.clients {
+  padding-bottom: 2rem;
+  h2 {
+    font-size: 3rem;
+    line-height: 5rem;
+    color: #09cfa9;
+  }
+}
+.slide {
+  filter: grayscale(1);
+}

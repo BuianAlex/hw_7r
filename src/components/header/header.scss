@@ -1,0 +1,39 @@
+header {
+  background-color: #2f3135;
+}
+.hidden-h1 {
+  display: none;
+}
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 30px;
+    &:hover {
+      color: #09d3ac;
+    }
+  }
+  .logo {
+    position: relative;
+    h1 {
+      position: absolute;
+      top: 0;
+      margin: 0;
+      left: 45px;
+      font-size: 0.6rem;
+      color: #ffffff;
+      overflow-wrap: normal;
+      letter-spacing: 3px;
+      text-align: left;
+    }
+  }
+}

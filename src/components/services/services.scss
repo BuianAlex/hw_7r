@@ -1,0 +1,36 @@
+.services {
+  display: block;
+  h2 {
+    font-size: 3rem;
+    line-height: 5rem;
+    color: #09cfa9;
+  }
+}
+.services-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  li {
+    position: relative;
+    width: 45%;
+    padding-left: 12%;
+    margin-bottom: 2rem;
+    list-style: none;
+    text-align: left;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+  }
+  h3 {
+    margin: 0;
+  }
+  p {
+    height: 8rem;
+    overflow: hidden;
+  }
+}
