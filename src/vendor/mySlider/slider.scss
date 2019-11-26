@@ -1,12 +1,12 @@
 $controlsColor: rgba(9, 207, 167, 0.534); // rgba(0, 0, 0, 0.7);
 $controlsHoverColor: rgba(9, 207, 167, 1); // rgba(0, 0, 0, 0.7);
-$dot-size: 13px;
+$dot-size: 1.5vw;
 $dot-position-botton: 2vw;
 .wraper-carousel {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  padding: 6vw 0;
+  //overflow: hidden;
+  padding: 0 0 6vw 0;
 }
 .carousel {
   position: relative;
@@ -31,7 +31,6 @@ $dot-position-botton: 2vw;
 }
 .sl-3 {
   width: 33vw;
-  height: 50px;
   margin: 0 0.5vw 0 0;
   &:nth-child(-n + 3) {
     display: block;
@@ -65,8 +64,7 @@ $dot-position-botton: 2vw;
 .slide-next {
   display: none;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 25%;
   font-size: 2rem;
   cursor: pointer;
   transition-duration: 0.3s;
@@ -76,7 +74,8 @@ $dot-position-botton: 2vw;
   background-color: transparent;
   border: none;
   &:hover {
-    transform: translateY(-50%) scale(1.2);
+    //transform: translateY(-50%) scale(1.2);
+    transform: scale(1.2);
     backface-visibility: hidden; //fix
   }
   &:focus {
@@ -125,32 +124,16 @@ $dot-position-botton: 2vw;
   backface-visibility: hidden; //fix
   background-color: $controlsHoverColor;
 }
-// .slider-dots_inside {
-//   bottom: 10vw;
-//   .dot {
-//     background-color: $controlsColor;
-//     &:hover {
-//       background-color: #fff;
-//     }
-//   }
-//   .dotActive {
-//     background-color: #fff;
-//   }
-// }
-// .slider-dots_outside {
-
-//   .dot {
-//     background-color: $controlsColor;
-//     &:hover {
-//       background-color: $controlsHoverColor;
-//     }
-//   }
-//   .dotActive {
-//     background-color: $controlsHoverColor;
-//   }
-// }
-
+@media (max-width: 576px) {
+  .sl-3 {
+    width: 100%;
+  }
+}
 @media (min-width: 576px) {
+  .dot {
+    height: 0.7vw;
+    width: 0.7vw;
+  }
   .slide-prev,
   .slide-next {
     display: block;

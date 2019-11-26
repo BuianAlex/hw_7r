@@ -7,11 +7,11 @@ class Team extends React.Component {
       <section className="team-section">
         <div className="container">
           <hr></hr>
-          <h3>Our team</h3>
-          <ul className="team-list">
+          <h2>Our team</h2>
+          <ul className="team-list flex-wrap">
             {this.props.teamData.map(item => {
               return (
-                <li>
+                <li key={item.id} className="col-4">
                   <div className="img-wraper">
                     <img src={'./img/' + item.img} alt="Kevin-Mitnick" />
                   </div>

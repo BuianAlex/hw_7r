@@ -27,11 +27,13 @@ class Services extends React.Component {
             <p>Boulevard</p>
           </div>
           <div className="col-3">
-            <Map center={{ lat: 33.765571, lng: -118.189348 }}></Map>
+            <div className="map">
+              <Map center={{ lat: 33.765571, lng: -118.189348 }}></Map>
+            </div>
           </div>
         </div>
         <div>
-          <p>© 2019 Alex_Bu</p>
+          <p className="copyright">© 2019 Alex_Bu</p>
         </div>
       </footer>
     );

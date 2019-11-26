@@ -8,16 +8,16 @@
   }
 }
 .team-list {
-  display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  margin-bottom: 1rem;
   li {
-    width: 20%;
-
+    min-width: 200px;
+    text-align: center;
     border: 1px solid #09cfa9;
     box-shadow: 0 8px 6px -6px #09cfa9;
     border-radius: 3px;
     padding: 2rem 1rem;
+    margin-bottom: 2rem;
   }
 }
 .img-wraper {

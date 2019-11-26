@@ -229,7 +229,7 @@ class App extends React.Component {
         {
           id: 1,
           name: 'ebay',
-          img: 'EBay_logo.svg.webp'
+          img: 'ebay.png'
         },
         {
           id: 2,
@@ -239,12 +239,12 @@ class App extends React.Component {
         {
           id: 3,
           name: 'CNN',
-          img: 'CNN.svg'
+          img: 'CNN.png'
         },
         {
           id: 4,
           name: 'Dell',
-          img: 'Dell_Logo.svg'
+          img: 'dell.png'
         },
         {
           id: 5,
@@ -260,6 +260,11 @@ class App extends React.Component {
           id: 7,
           name: 'United_States_Department_of_Defense_Seal',
           img: 'United_States_Department_of_Defense_Seal.svg.png'
+        },
+        {
+          id: 8,
+          name: 'google',
+          img: 'googlelogo_color_272x92dp.png'
         }
       ]
     };

@@ -1,33 +1,6 @@
 * {
   box-sizing: border-box;
 }
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
-.container {
-  display: block;
-  width: 1200px;
-  margin: 0 auto;
-}
 li {
   list-style: none;
 }
@@ -38,5 +11,61 @@ hr {
   background-color: #09d3ac;
   border: none;
   height: 1px;
-  width: 1000px;
+  width: 95%;
+}
+h2,
+h3 {
+  text-align: center;
+}
+h2 {
+  line-height: 2rem;
+  font-size: 2rem;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.flex-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.col-3 {
+  width: 100%;
+}
+.col-4 {
+  width: 100%;
+}
+@media (min-width: 576px) {
+  h2 {
+    font-size: 3vw;
+    line-height: 5rem;
+  }
+  .container {
+    max-width: 540px;
+  }
+  .col-3 {
+    width: 33%;
+  }
+  .col-4 {
+    width: 20%;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }

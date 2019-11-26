@@ -5,8 +5,6 @@
   padding-bottom: 2rem;
 
   h2 {
-    font-size: 3rem;
-    line-height: 5rem;
     color: #fff;
   }
   p {
@@ -15,8 +13,23 @@
   }
 }
 .office {
-  width: 30%;
+  width: 100%;
   float: left;
   margin-right: 1vw;
-  margin-bottom: 0.1vw;
+  margin-bottom: 1rem;
+}
+@media (min-width: 576px) {
+  .office {
+    width: 30%;
+    margin-right: 1vw;
+    margin-bottom: 0.1vw;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (max-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
 }

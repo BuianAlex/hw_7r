@@ -3,11 +3,25 @@
 .clients {
   padding-bottom: 2rem;
   h2 {
-    font-size: 3rem;
-    line-height: 5rem;
     color: #09cfa9;
   }
 }
 .slide {
   filter: grayscale(1);
+  height: 7vh;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.slide-prev {
+  left: -30px;
+}
+.slide-next {
+  right: -30px;
+}
+@media (min-width: 576px) {
+  .slide {
+    height: 20vh;
+  }
 }

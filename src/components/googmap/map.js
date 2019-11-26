@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => (
   <div>
-    <img className="mark" src={'./img/' + text} />
+    <img className="mark" src={'./img/' + text} alt="mark" />
   </div>
 );
 
@@ -19,7 +19,8 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100%', width: '100%' }}>
+      // <div style={{ height: '100%', width: '100%' }}>
+      <>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAqlBsm7HZc5gk_UhchSTQOlPmKQz5Gc2c' }}
           defaultCenter={this.props.center}
@@ -31,7 +32,8 @@ class SimpleMap extends Component {
             text="map_pin.svg"
           />
         </GoogleMapReact>
-      </div>
+      </>
+      // </div>
     );
   }
 }
