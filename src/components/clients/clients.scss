@@ -10,7 +10,7 @@
   filter: grayscale(1);
   height: 7vh;
   img {
-    width: 100%;
+    width: 80%;
     height: auto;
   }
 }
@@ -23,5 +23,13 @@
 @media (min-width: 576px) {
   .slide {
     height: 20vh;
+    img {
+      width: 80%;
+    }
+  }
+}
+@media (orientation: landscape) {
+  .slide {
+    height: 25vh;
   }
 }

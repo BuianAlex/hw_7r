@@ -29,12 +29,13 @@ class Header extends React.Component {
           </div>
           <nav>
             {[
-              { name: 'Services', url: '#serv' },
-              { name: 'About US', url: '#about' },
-              { name: 'Contacts', url: '#contacts' }
+              { id: 1, name: 'Services', url: '#serv' },
+              { id: 2, name: 'About US', url: '#about' },
+              { id: 3, name: 'Contacts', url: '#contacts' }
             ].map(index => {
               return (
                 <a
+                  key={index.id}
                   href={index.url}
                   onClick={() => {
                     this.navPopup();

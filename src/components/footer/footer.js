@@ -1,6 +1,12 @@
 import React from 'react';
 import './footer.scss';
 import Map from './../googmap/map';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTwitter,
+  faFacebook,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons';
 
 class Services extends React.Component {
   render() {
@@ -16,6 +22,17 @@ class Services extends React.Component {
             <nav>
               <a href="#serv">Services</a>
               <a href="#about">About US</a>
+              <div className="socialBtn">
+                <a href="#">
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faYoutube} />
+                </a>
+              </div>
             </nav>
           </div>
           <div className="col-3">

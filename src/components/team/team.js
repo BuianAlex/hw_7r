@@ -6,7 +6,6 @@ class Team extends React.Component {
     return (
       <section className="team-section">
         <div className="container">
-          <hr></hr>
           <h2>Our team</h2>
           <ul className="team-list flex-wrap">
             {this.props.teamData.map(item => {

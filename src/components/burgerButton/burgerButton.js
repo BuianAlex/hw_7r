@@ -3,8 +3,6 @@ import './burgerButton.scss';
 
 class Burger extends React.Component {
   render() {
-    console.log(this.props.btnState);
-
     return (
       <>
         <button
