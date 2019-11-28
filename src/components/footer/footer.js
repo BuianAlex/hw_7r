@@ -23,13 +23,13 @@ class Services extends React.Component {
               <a href="#serv">Services</a>
               <a href="#about">About US</a>
               <div className="socialBtn">
-                <a href="#">
+                <a href="facebook.com">
                   <FontAwesomeIcon icon={faFacebook} />
                 </a>
-                <a href="#">
+                <a href="twitter.com">
                   <FontAwesomeIcon icon={faTwitter} />
                 </a>
-                <a href="#">
+                <a href="youtube.com">
                   <FontAwesomeIcon icon={faYoutube} />
                 </a>
               </div>
