@@ -4,7 +4,7 @@ import Carousel from './../../vendor/mySlider/slider';
 
 class Clients extends React.Component {
   componentDidMount() {
-    const mySlider = new Carousel({
+    new Carousel({
       wraper: document.querySelector('#sl-1'),
       autoSide: true,
       autoSideTimeOut: 4000,
