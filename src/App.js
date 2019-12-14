@@ -6,6 +6,7 @@ import Services from './components/services/services';
 import About from './components/about/about';
 import Team from './components/team/team';
 import Clients from './components/clients/clients';
+import Comments from './components/comments/comments';
 import Footer from './components/footer/footer';
 
 class App extends React.Component {
@@ -22,6 +23,7 @@ class App extends React.Component {
         <About></About>
         <Team teamData={this.data.team}></Team>
         <Clients clientsData={this.data.clients}></Clients>
+        <Comments></Comments>
         <Footer></Footer>
       </div>
     );

@@ -1,4 +1,4 @@
-header {
+.app-header {
   background-color: #2f3135;
 }
 .hidden-h1 {
@@ -27,7 +27,7 @@ header {
   }
   .logo {
     position: relative;
-    z-index: 200;
+    z-index: 100;
     margin-left: 1rem;
     h1 {
       position: absolute;

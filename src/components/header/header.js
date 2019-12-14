@@ -17,7 +17,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <header>
+      <header className="app-header">
         <div
           className={`container app-header  ${
             this.state.navState ? 'nav-shown' : null
