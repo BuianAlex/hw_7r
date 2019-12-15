@@ -7,9 +7,11 @@ class Comments {
   constructor() {
     this.pushComment = this.pushComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
+    this.putComment = this.putComment.bind(this);
   }
 
   async readDb() {
+    // TODO: ref to readstream
     try {
       const dataDB = await fs.readFile(file);
       return JSON.parse(dataDB);
@@ -64,8 +66,6 @@ class Comments {
         return res;
       }
       const finalData = findChildren(rootComments);
-      // console.log(finalData);
-
       result = finalData;
     } catch (error) {
       console.error('getComment--' + error);
@@ -75,6 +75,7 @@ class Comments {
   }
 
   async pushComment(dataObj) {
+    // TODO: clean data
     let errors = [];
     let result = [];
     const genID = (
@@ -106,6 +107,41 @@ class Comments {
     } catch (error) {
       console.error('pushComment--' + error);
     }
+  }
+
+  async deleteComment(req, res) {
+    let errors = [];
+    let result = [];
+    const dataDB = await this.readDb();
+    if (dataDB) {
+      const newData = dataDB.filter(item => item.id !== req.body.id);
+      try {
+        await fs.writeFile(file, JSON.stringify(newData));
+        result = newData;
+      } catch (error) {
+        console.error('pushComment--' + error);
+      }
+    }
+    res.send(JSON.stringify({ result: result, errors: errors }));
+  }
+
+  async putComment(req, res) {
+    // TODO: clean data
+    let errors = [];
+    let result = [];
+    const dataDB = await this.readDb();
+    if (dataDB) {
+      const commentIndex = dataDB.findIndex(item => item.id == req.body.id);
+      dataDB[commentIndex].text = req.body.text;
+      dataDB[commentIndex].utime = Date.now();
+      try {
+        await fs.writeFile(file, JSON.stringify(dataDB));
+        result = true;
+      } catch (error) {
+        console.error('putComment--' + error);
+      }
+    }
+    res.send(JSON.stringify({ result: result, errors: errors }));
   }
 
   async deleteComment(req, res) {

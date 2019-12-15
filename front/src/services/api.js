@@ -37,17 +37,34 @@ async function postComments(data) {
   }
   return res;
 }
+//  TODO: putComment
+async function putComment(data) {
+  let res = {};
+  try {
+    const servRes = await axios.put('/api/comments', data);
+    if (servRes.status === 200) {
+      if (servRes.data.result && servRes.data.result.length > 0) {
+        res.result = servRes.data.result;
+      } else {
+        res.error = 'No comments yet';
+      }
+    }
+  } catch (error) {
+    if (error) {
+      res.error = 'Server does not respond.';
+    }
+  }
+  return res;
+}
 
 async function deleteComment(commentID) {
-  console.log(commentID);
-
   let res = {};
   try {
     const servRes = await axios.delete('/api/comments', {
       data: { id: commentID }
     });
     if (servRes.status === 200) {
-      if (servRes.data.result && servRes.data.result.length > 0) {
+      if (servRes.data.result) {
         res.result = servRes.data.result;
       } else {
         res.error = 'No comments yet';
@@ -85,4 +102,11 @@ async function userLogIn(data) {
   }
 }
 
-export { getComments, postComments, userRegister, userLogIn, deleteComment };
+export {
+  getComments,
+  postComments,
+  userRegister,
+  userLogIn,
+  deleteComment,
+  putComment
+};

@@ -17,13 +17,13 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      formState: false, //log or reg
+      formState: false, //False  log
       loginFild: ' ',
-      errLoginFild: false,
+      errLoginFild: true,
       passwordFild: '',
       errPasswordFild: true,
       cPasswordFild: '',
-      errcPasswordFild: true,
+      errcPasswordFild: false,
       emailFild: '',
       errEmailFild: false,
       phoneFild: '38',
@@ -45,6 +45,7 @@ class Login extends React.Component {
       errcPasswordFild: '',
       emailFild: '',
       errEmailFild: '',
+      // TODO: ADD "+"
       phoneFild: '38',
       errPhoneFild: '',
       confirmBtn: false,
@@ -52,13 +53,15 @@ class Login extends React.Component {
       spiner: false
     });
   };
+
   actionFormState = () => {
     this.setState({ formState: !this.state.formState });
   };
+
   handleTextFildChange = e => {
     if (!/[-\/\\^$*+?()|[\]{}]/g.test(e.target.value)) {
       if (e.target.name === 'login') {
-        this.setState({ loginFild: e.target.value.trim() });
+        this.setState({ loginFild: e.target.value });
         if (e.target.value.length < 3) {
           this.setState({
             errLoginFild: 'Too Short!',
@@ -82,13 +85,10 @@ class Login extends React.Component {
         const mediumRegex = new RegExp(
           '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
         );
-        this.setState({ passwordFild: e.target.value.trim() });
-        if (this.state.formState) {
-          if (!mediumRegex.test(e.target.value)) {
-            this.setState({ errPasswordFild: 'password is not secure' });
-          } else {
-            this.setState({ errPasswordFild: false });
-          }
+        this.setState({ passwordFild: e.target.value });
+
+        if (!mediumRegex.test(e.target.value)) {
+          this.setState({ errPasswordFild: 'password is not secure' });
         } else {
           this.setState({ errPasswordFild: false });
         }
@@ -98,7 +98,6 @@ class Login extends React.Component {
         this.setState({ cPasswordFild: e.target.value });
         for (let i = 0; i < e.target.value.length; i++) {
           if (this.state.passwordFild[i] !== e.target.value[i]) {
-            console.log(this.state.passwordFild[i] !== e.target.value[i]);
             this.setState({
               errcPasswordFild: 'Confirm not match'
             });
@@ -133,6 +132,42 @@ class Login extends React.Component {
           this.setState({ errPhoneFild: 'Phone number is not valid' });
         }
       }
+    } else {
+      switch (e.target.name) {
+        case 'login':
+          this.setState({
+            errLoginFild: 'not allowed special characters'
+          });
+          break;
+        case 'password':
+          this.setState({
+            errLoginFild: 'not allowed special characters'
+          });
+          break;
+        case 'password':
+          this.setState({
+            errPasswordFild: 'not allowed special characters'
+          });
+          break;
+        case 'cPassword':
+          this.setState({
+            errcPasswordFild: 'not allowed special characters'
+          });
+          break;
+        case 'email':
+          this.setState({
+            errEmailFild: 'not allowed special characters'
+          });
+          break;
+        case 'phone':
+          this.setState({
+            errPhoneFild: 'not allowed special characters'
+          });
+          break;
+
+        default:
+          break;
+      }
     }
   };
 
@@ -146,29 +181,24 @@ class Login extends React.Component {
           emailFild: email,
           phoneFild: phone
         } = this.state;
-        const res = await userRegister({
+        let dataToSend = {
           login,
           password,
           email,
           phone
-        });
+        };
+        for (const key in dataToSend) {
+          dataToSend[key] = dataToSend[key].trim();
+        }
+        const res = await userRegister(dataToSend);
         if (res.errors.length === 0) {
           localStorage.setItem('userSID', JSON.stringify(res.result));
-          console.log('user is logined');
           this.actionCloseBtn();
           //this.setState({ spiner: false });
         } else {
           this.setState({ formErrors: res.errors });
           this.setState({ spiner: false });
         }
-        // console.log(res);
-
-        // if (res.data.result) {
-        //   this.props.close();
-        // }
-        // if (res.data.errors.length > 0) {
-        //   this.setState({ formErrors: res.data.errors });
-        // }
       } else {
         this.setState({ spiner: true });
         const { loginFild: login, passwordFild: password } = this.state;
@@ -178,7 +208,6 @@ class Login extends React.Component {
         });
         if (res.errors.length === 0) {
           localStorage.setItem('userSID', JSON.stringify(res.result));
-          console.log('user is logined');
           this.actionCloseBtn();
           //this.setState({ spiner: false });
         } else {
@@ -189,6 +218,16 @@ class Login extends React.Component {
     }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.formState !== this.state.formState) {
+      this.setState({ passwordFild: '' });
+      this.setState({ errPasswordFild: true });
+      if (!this.state.formState) {
+        this.setState({ errcPasswordFild: false });
+      } else {
+        this.setState({ errcPasswordFild: true });
+      }
+    }
+
     if (
       prevState.errLoginFild !== this.state.errLoginFild ||
       prevState.errPasswordFild !== this.state.errPasswordFild ||
@@ -197,7 +236,7 @@ class Login extends React.Component {
       if (
         !this.state.errLoginFild &&
         !this.state.errPasswordFild &&
-        (!this.state.errcPasswordFild || !this.setState.formState)
+        !this.state.errcPasswordFild
       ) {
         this.setState({ confirmBtn: true });
       } else {
@@ -207,6 +246,7 @@ class Login extends React.Component {
   }
 
   render() {
+    // FIXME: ref to react router
     return (
       <div className="background">
         <div className="dialog">
@@ -251,7 +291,7 @@ class Login extends React.Component {
               onChangeFild={this.handleTextFildChange}
               value={this.state.passwordFild}
               name="password"
-              error={this.state.errPasswordFild}
+              error={this.state.formState && this.state.errPasswordFild}
             />
             {this.state.formState && (
               <>
@@ -264,6 +304,7 @@ class Login extends React.Component {
                   name="cPassword"
                   error={this.state.errcPasswordFild}
                 />
+                {/* TODO: ADD show pass */}
                 <TextField
                   type="text "
                   classes="fild"
@@ -282,6 +323,7 @@ class Login extends React.Component {
                   name="phone"
                   error={this.state.errPhoneFild}
                 />
+                //TODO: field for upload photo
               </>
             )}
             {this.state.spiner && (

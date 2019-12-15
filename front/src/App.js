@@ -18,13 +18,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header></Header>
+        {/* <Header></Header>
         <Services srvData={this.data.services}></Services>
         <About></About>
         <Team teamData={this.data.team}></Team>
-        <Clients clientsData={this.data.clients}></Clients>
+        <Clients clientsData={this.data.clients}></Clients> */}
         <Comments></Comments>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     );
   }

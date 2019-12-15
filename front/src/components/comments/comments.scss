@@ -1,9 +1,13 @@
 #comments {
   position: relative;
+  ul {
+    padding: 0px;
+  }
 }
 .avatar {
   position: absolute;
   border: 1px solid #000;
+  background-color: lightgray;
   border-radius: 2px;
   left: 0;
   top: 0;
@@ -13,36 +17,49 @@
   img {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+
+    transform: translate(-50%, 0);
     height: 100%;
   }
 }
-.autor {
-  line-height: 1rem;
-}
+
 .comment {
   position: relative;
   padding-left: 70px;
   margin: 1rem 0;
-
-  //border: 1px solid #09d3ac;
 }
 .textArea-wraper {
   position: relative;
+  margin-top: 1rem;
 }
 .post-footer {
   display: flex;
   justify-content: flex-end;
 }
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  span {
+    padding-right: 5px;
+  }
+}
 .btn-menu {
+  display: flex;
+  height: 20px;
+  justify-content: flex-end;
 }
 .action-btn {
   background-color: transparent;
+  margin-top: 3px;
   border: none;
   outline: none;
   color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  &_hidden {
+    display: none;
+  }
   &_link {
     text-decoration: underline;
     font-size: 1rem;
@@ -51,12 +68,17 @@
     color: #09d3ac;
   }
   &_close {
-    //float: right;
-    margin-left: 100%;
+    position: absolute;
+    right: 0;
   }
 }
 .post-body {
   margin-bottom: 2rem;
+  &:hover {
+    .action-btn_hidden {
+      display: inline-block;
+    }
+  }
 }
 .post-header {
   display: flex;
@@ -66,7 +88,6 @@
 }
 .post-time {
   color: rgba(0, 0, 0, 0.7);
-  margin-left: 1rem;
   font-style: italic;
   font-size: 0.7rem;
 }
@@ -77,7 +98,7 @@
   resize: vertical;
   border-color: rgba(0, 0, 0, 0.23);
   border-radius: 2px;
-  padding: 0.5rem 0.5rem 1rem;
+  padding: 1rem 0.5rem 1rem;
   &:focus {
     outline: 2px solid #09d3ac;
   }
@@ -114,9 +135,6 @@ hr {
   line-height: 3rem;
 }
 .message {
-  //height: 100px;
-  // border-bottom: 1px solid rgba(0, 0, 0, 0.23);
-  // border-top: 1px solid rgba(0, 0, 0, 0.23);
   border: 1px solid rgba(0, 0, 0, 0.23);
   padding: 0rem 1rem;
 }

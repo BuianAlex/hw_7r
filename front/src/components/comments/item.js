@@ -9,6 +9,7 @@ import {
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
+// Q: function toDate better put in a separate file or it's normal
 function toDate(time) {
   let datastring = '';
   const monthsName = [
@@ -49,6 +50,7 @@ class Component extends React.Component {
     };
     this.textArea = React.createRef();
   }
+
   handleTextChange = event => {
     if (this.state.textAreaVal.length < 300) {
       this.setState({ textAreaVal: event.target.value });
@@ -69,35 +71,42 @@ class Component extends React.Component {
       this.textArea.current.focus();
     }
   }
+
   actiontextAreaState = () => {
     this.setState({ textAreaState: !this.state.textAreaState });
   };
+
   actionCloseBtn = () => {
+    // Q: setState like this it's OK?
     this.setState({ textAreaState: !this.state.textAreaState });
     this.setState({ textAreaVal: ' ' });
     this.setState({ textEdited: false });
     this.setState({ autorEdit: false });
   };
+
   actionEditBtn = () => {
     this.setState({ autorEdit: !this.state.autorEdit });
     this.setState({ textAreaVal: this.state.commentText });
     this.setState({ textAreaState: true });
-    console.log(this.state.autorEdit);
   };
+
   actionSaveBtn = () => {
     this.props.onSave(
       this.props.commentData.id,
       this.state.textAreaVal,
-      this.props.commentData.parent
+      this.props.commentData.parent,
+      this.state.autorEdit
     );
     this.setState({ textAreaVal: ' ' });
     this.setState({ textEdited: false });
     this.setState({ autorEdit: false });
-    if (this.state.textAreaState) {
+    if (this.state.textAreaState && !this.props.start) {
       this.setState({ textAreaState: false });
     }
   };
+
   render() {
+    // FIXME: blocks doesn’t look very cool
     return (
       <li
         className="comment"
@@ -127,7 +136,7 @@ class Component extends React.Component {
             </div>
           </header>
 
-          {!this.state.autorEdit && (
+          {!this.state.autorEdit && !this.props.start && (
             <div className="message">
               <p>{this.props.commentData.text}</p>
             </div>
@@ -135,16 +144,20 @@ class Component extends React.Component {
 
           {this.state.textAreaState ? (
             <>
-              {this.state.textAreaState && !this.props.start && (
-                <button className="action-btn  action-btn_close">
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    size="lg"
-                    onClick={this.actionCloseBtn}
-                  />
-                </button>
-              )}
               <div className="textArea-wraper">
+                {this.state.textAreaState && !this.props.start && (
+                  <button className="action-btn  action-btn_close">
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      size="lg"
+                      onClick={this.actionCloseBtn}
+                    />
+                  </button>
+                )}
+                {/* TODO: 
+                  text area auto height
+                  if copy\paste
+                */}
                 <textarea
                   className="reply-text"
                   placeholder="Write a response..."
@@ -181,20 +194,26 @@ class Component extends React.Component {
                 )}
 
               {this.state.textEdited && (
-                <button className="action-btn" onClick={this.actionSaveBtn}>
+                <button
+                  className="action-btn action-btn_hidden"
+                  onClick={this.actionSaveBtn}
+                >
                   <FontAwesomeIcon icon={faSave} size="lg" />
                 </button>
               )}
               {this.props.editable && !this.props.start && (
                 <>
                   {!this.state.textAreaState && (
-                    <button className="action-btn" onClick={this.actionEditBtn}>
+                    <button
+                      className="action-btn action-btn_hidden"
+                      onClick={this.actionEditBtn}
+                    >
                       <FontAwesomeIcon icon={faEdit} size="lg" />
                     </button>
                   )}
 
                   <button
-                    className="action-btn"
+                    className="action-btn action-btn_hidden"
                     onClick={() => {
                       this.props.onDelete(this.props.commentData.id);
                     }}

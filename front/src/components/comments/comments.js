@@ -4,7 +4,8 @@ import Item from './item';
 import {
   getComments,
   postComments,
-  deleteComment
+  deleteComment,
+  putComment
 } from '../../services/api.js';
 import Spiner from '../spiner/spiner';
 import Login from '../login/login';
@@ -60,13 +61,21 @@ class Comments extends React.Component {
     return toRender;
   }
 
-  actionSave = async (id, text, parent) => {
+  actionSave = async (id, text, parent, edited) => {
     if (this.state.userLogin) {
       const autorID = this.state.userLogin.id;
+      let resData = {};
       this.setState({ spinerState: true });
-      const resData = await postComments({ id, text, parent, autorID });
+      if (edited && id !== 0) {
+        // TODO: putComments
+        resData = await putComment({ id, text, parent, autorID });
+        resData = await getComments();
+      } else {
+        resData = await postComments({ id, text, parent, autorID });
+      }
       this.setState({ spinerState: false });
       this.setState({ errors: resData.error });
+      // Q: update all or only new
       this.setState({ commentsData: resData.result });
     } else {
       this.setState({ loginPopup: true });
@@ -110,7 +119,7 @@ class Comments extends React.Component {
   actionLogOut = () => {
     localStorage.removeItem('userSID');
     this.setState({ userLogin: false });
-    //ToDo req to server
+    // TODO: req to server
   };
 
   render() {
@@ -119,6 +128,13 @@ class Comments extends React.Component {
         <section id="comments" className="container">
           {this.state.loginPopup && (
             <Login close={this.actionLoginPopUp}></Login>
+            // TODO: Show LoginPopUp in  current screen location
+            /*Q: index.js:1375 Warning: Can't perform a React state update
+             on an unmounted component. This is a no-op, but it indicates 
+             a memory leak in your application. To fix, cancel all 
+             subscriptions and asynchronous tasks in the 
+             componentWillUnmount method.
+             in Login (at comments.js:131)*/
           )}
 
           <h2>Comments</h2>
@@ -143,6 +159,7 @@ class Comments extends React.Component {
                 Log Out
               </button>{' '}
               <hr />
+              {/* FIXME: */}
               <Item
                 start={true}
                 commentData={{
@@ -160,10 +177,12 @@ class Comments extends React.Component {
           {this.state.spinerState && (
             <div className="comment-spiner">
               <Spiner />
+              {/* TODO: if all is OK show something */}
             </div>
           )}
           {this.state.errors && (
             <span className="errors">{this.state.errors}</span>
+            //FIXME: ? place where error to show
           )}
           <ul>
             {this.state.commentsData &&
