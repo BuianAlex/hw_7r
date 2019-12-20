@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {setLocalUser} from  './localStor'
 
 async function getComments() {
   let res = {};
@@ -89,6 +90,9 @@ async function userLogIn(data) {
   try {
     const res = await axios.post('/api/login', data);
     if (res.status === 200) {
+      if (res.data.errors.length === 0) {
+        setLocalUser(res.data.result);
+      }
       return res.data;
     } else {
       let message = {};
@@ -96,6 +100,8 @@ async function userLogIn(data) {
       return message;
     }
   } catch (err) {
+    console.error(err);
+    
     let message = {};
     message.errors = ['Server does not respond.'];
     return message;

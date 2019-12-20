@@ -1,0 +1,12 @@
+logIn
+
+URL
+/api/login
+
+HTTP Метод
+POST
+
+REQ
+{'login': test, 'password': 1111}
+RES
+{ result: { id, login, photo }, errors: errors }

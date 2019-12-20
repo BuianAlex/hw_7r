@@ -78,16 +78,20 @@ class Component extends React.Component {
 
   actionCloseBtn = () => {
     // Q: setState like this it's OK?
-    this.setState({ textAreaState: !this.state.textAreaState });
-    this.setState({ textAreaVal: ' ' });
-    this.setState({ textEdited: false });
-    this.setState({ autorEdit: false });
+    this.setState({
+      textAreaState: !this.state.textAreaState,
+      textAreaVal: ' ',
+      textEdited: false,
+      autorEdit: false
+    });
   };
 
   actionEditBtn = () => {
-    this.setState({ autorEdit: !this.state.autorEdit });
-    this.setState({ textAreaVal: this.state.commentText });
-    this.setState({ textAreaState: true });
+    this.setState({
+      autorEdit: !this.state.autorEdit,
+      textAreaVal: this.state.commentText,
+      textAreaState: true
+    });
   };
 
   actionSaveBtn = () => {
@@ -97,9 +101,11 @@ class Component extends React.Component {
       this.props.commentData.parent,
       this.state.autorEdit
     );
-    this.setState({ textAreaVal: ' ' });
-    this.setState({ textEdited: false });
-    this.setState({ autorEdit: false });
+    this.setState({
+      textAreaVal: ' ',
+      textEdited: false,
+      autorEdit: false
+    });
     if (this.state.textAreaState && !this.props.start) {
       this.setState({ textAreaState: false });
     }

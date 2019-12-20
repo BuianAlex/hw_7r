@@ -8,8 +8,14 @@ import {
   faYoutube
 } from '@fortawesome/free-brands-svg-icons';
 
-class Services extends React.Component {
+class Footer extends React.Component {
+
+
+  
+   
   render() {
+    console.log(this.props.map);
+    
     return (
       <footer id="contacts" className="footer">
         <div className="container flex-wrap">
@@ -45,7 +51,7 @@ class Services extends React.Component {
           </div>
           <div className="col-3">
             <div className="map">
-              <Map center={{ lat: 33.765571, lng: -118.189348 }}></Map>
+              <Map center={{ lat: 33.765571, lng: -118.189348 }} key={this.props.map}></Map>
             </div>
           </div>
         </div>
@@ -57,4 +63,4 @@ class Services extends React.Component {
   }
 }
 
-export default Services;
+export default Footer;

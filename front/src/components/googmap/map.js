@@ -17,10 +17,12 @@ class SimpleMap extends Component {
   };
 
   render() {
+    console.log(this.props);
+    
     return (
       <>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAqlBsm7HZc5gk_UhchSTQOlPmKQz5Gc2c' }}
+          bootstrapURLKeys={{ key: "AIzaSyAqlBsm7HZc5gk_UhchSTQOlPmKQz5Gc2c" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >

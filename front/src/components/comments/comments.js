@@ -7,22 +7,24 @@ import {
   deleteComment,
   putComment
 } from '../../services/api.js';
+import {getLocalUser, remLocalUser} from '../../services/localStor'
 import Spiner from '../spiner/spiner';
 import Login from '../login/login';
+
 
 class Comments extends React.Component {
   constructor() {
     super();
-
+     
     this.state = {
-      userLogin: JSON.parse(localStorage.getItem('userSID')) || false,
+      userLogin: getLocalUser(),
       replyBtn: false,
       loginPopup: false,
       spinerState: true,
       errors: '',
       startItem: {
         id: 0,
-        autor: JSON.parse(localStorage.getItem('userSID')),
+        autor: getLocalUser(),
         text: '',
         ctime: '',
         utime: '',
@@ -34,7 +36,7 @@ class Comments extends React.Component {
   }
 
   nestedComment(data) {
-    let toRender = data.map(item => {
+    const toRender = data.map(item => {
       if (item.children.length === 0) {
         return (
           <Item
@@ -43,7 +45,7 @@ class Comments extends React.Component {
             onSave={this.actionSave}
             commentData={item}
             editable={item.autor.autorID === this.state.userLogin.id}
-          ></Item>
+          />
         );
       }
       return (
@@ -64,7 +66,7 @@ class Comments extends React.Component {
   actionSave = async (id, text, parent, edited) => {
     if (this.state.userLogin) {
       const autorID = this.state.userLogin.id;
-      let resData = {};
+      const resData = {};
       this.setState({ spinerState: true });
       if (edited && id !== 0) {
         // TODO: putComments
@@ -73,10 +75,12 @@ class Comments extends React.Component {
       } else {
         resData = await postComments({ id, text, parent, autorID });
       }
-      this.setState({ spinerState: false });
-      this.setState({ errors: resData.error });
-      // Q: update all or only new
-      this.setState({ commentsData: resData.result });
+      this.setState({ 
+        spinerState: false, 
+        errors: resData.error,  
+        commentsData: resData.result
+      });
+
     } else {
       this.setState({ loginPopup: true });
     }
@@ -86,27 +90,37 @@ class Comments extends React.Component {
     const resData = await deleteComment(id);
     if (!resData.error) {
       const resData = await getComments();
-      this.setState({ spinerState: false });
-      this.setState({ errors: resData.error });
-      this.setState({ commentsData: resData.result });
+      this.setState({ 
+        spinerState: false, 
+        errors: resData.error,  
+        commentsData: resData.result
+      });
     } else {
-      this.setState({ spinerState: false });
-      this.setState({ errors: resData.error });
+      this.setState({ 
+        spinerState: false, 
+        errors: resData.error
+      });
+
     }
   }
 
   async componentDidMount() {
     const resData = await getComments();
-    this.setState({ spinerState: false });
-    this.setState({ errors: resData.error });
-    this.setState({ commentsData: resData.result });
+    this.setState({ 
+      spinerState: false, 
+      errors: resData.error,  
+      commentsData: resData.result
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.loginPopup !== this.state.loginPopup) {
-      if (localStorage.hasOwnProperty('userSID')) {
+      const isUser = getLocalUser();
+      console.log(isUser);
+      
+      if (isUser) {
         this.setState({
-          userLogin: JSON.parse(localStorage.getItem('userSID'))
+          userLogin: isUser,
         });
       }
     }
@@ -117,7 +131,7 @@ class Comments extends React.Component {
   };
 
   actionLogOut = () => {
-    localStorage.removeItem('userSID');
+    remLocalUser(); 
     this.setState({ userLogin: false });
     // TODO: req to server
   };

@@ -192,31 +192,34 @@ class Login extends React.Component {
         }
         const res = await userRegister(dataToSend);
         if (res.errors.length === 0) {
-          localStorage.setItem('userSID', JSON.stringify(res.result));
           this.actionCloseBtn();
-          //this.setState({ spiner: false });
         } else {
-          this.setState({ formErrors: res.errors });
-          this.setState({ spiner: false });
+          this.setState({ 
+            formErrors: res.errors,
+            spiner: false
+           });
         }
       } else {
         this.setState({ spiner: true });
         const { loginFild: login, passwordFild: password } = this.state;
+        const trLogin = login.trim();
+        const trPassword = password.trim();
         const res = await userLogIn({
-          login,
-          password
+          login: trLogin,
+          password: trPassword
         });
         if (res.errors.length === 0) {
-          localStorage.setItem('userSID', JSON.stringify(res.result));
           this.actionCloseBtn();
-          //this.setState({ spiner: false });
         } else {
-          this.setState({ formErrors: res.errors });
-          this.setState({ spiner: false });
+          this.setState({ 
+            formErrors: res.errors,
+            spiner: false
+           });
         }
       }
     }
   }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.formState !== this.state.formState) {
       this.setState({ passwordFild: '' });
@@ -323,7 +326,7 @@ class Login extends React.Component {
                   name="phone"
                   error={this.state.errPhoneFild}
                 />
-                //TODO: field for upload photo
+                {/* TODO: field for upload photo */}
               </>
             )}
             {this.state.spiner && (

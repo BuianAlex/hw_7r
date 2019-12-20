@@ -12,9 +12,9 @@ class Burger extends React.Component {
             this.props.onClick();
           }}
         >
-          <div></div>
-          <div></div>
-          <div></div>
+          <div/>
+          <div/>
+          <div/>
         </button>
       </>
     );

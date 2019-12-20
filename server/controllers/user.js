@@ -121,6 +121,7 @@ class Users {
     } else {
       errors.push('Login or password does not match');
     }
+
     res.send(JSON.stringify({ result: result, errors: errors }));
 
     //console.log(this);

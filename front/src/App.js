@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/header/header';
-import siteData from './siteData';
+import siteData from './data/siteData';
 import Services from './components/services/services';
 import About from './components/about/about';
 import Team from './components/team/team';
@@ -18,13 +18,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <Header></Header>
-        <Services srvData={this.data.services}></Services>
-        <About></About>
-        <Team teamData={this.data.team}></Team>
-        <Clients clientsData={this.data.clients}></Clients> */}
-        <Comments></Comments>
-        {/* <Footer></Footer> */}
+       <Header/>
+        <Services srvData={this.data.services}/>
+        <About/>
+        <Team teamData={this.data.team}/>
+        <Clients clientsData={this.data.clients}/> 
+        <Comments/>
+        <Footer map={this.data.gmKey}/>
       </div>
     );
   }
