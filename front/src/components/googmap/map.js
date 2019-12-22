@@ -17,8 +17,6 @@ class SimpleMap extends Component {
   };
 
   render() {
-    console.log(this.props);
-    
     return (
       <>
         <GoogleMapReact

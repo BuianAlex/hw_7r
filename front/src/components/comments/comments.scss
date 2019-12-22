@@ -1,5 +1,6 @@
 #comments {
   position: relative;
+  padding-bottom: 1rem;
   ul {
     padding: 0px;
   }
@@ -113,6 +114,10 @@
   display: block;
   text-align: right;
   font-style: italic;
+  &_red{
+    color: rgba(253, 2, 2, 0.5);
+
+  }
 }
 .logLink {
   color: #09d3ac;

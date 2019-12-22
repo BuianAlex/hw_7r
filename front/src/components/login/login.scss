@@ -1,18 +1,19 @@
 .background {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.562);
   z-index: 100;
   cursor: pointer;
 }
 .dialog {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  width: 60vw;
+  width: 95%;
+  max-height: 100vh;
   max-width: 600px;
   padding-bottom: 1rem;
   transform: translate(-50%, -50%);
@@ -21,11 +22,13 @@
   background-color: #fff;
   border-radius: 4px;
   overflow: hidden;
+  overflow-y: scroll;
   z-index: 300;
   //TODO: for mobile
 }
 .header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   padding: 1rem;
   background-color: #2f3135;
@@ -34,7 +37,8 @@
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 .content {
-  padding: 1rem 3rem;
+  padding: 1rem 3rem 1rem;
+  height: 100%;
   &-navBtn {
     width: 50%;
     padding: 0.5rem;
@@ -124,4 +128,29 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+// Extra small devices (portrait phones, less than 576px)
+
+@media (min-width: 575.98px) {
+  .dialog{
+    width: 60vw;
+    overflow-y: hidden;   
+  }
+
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {  }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {  }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {  }
+
+@media(max-device-width: 1280px) 
+and (orientation: landscape){
+  .dialog{
+    overflow-y: scroll;   
+  }
 }

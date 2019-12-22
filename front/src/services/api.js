@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {setLocalUser} from  './localStor'
+import {setLocalUser} from  './localStorage'
 
 async function getComments() {
   let res = {};

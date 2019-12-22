@@ -46,23 +46,36 @@ class Component extends React.Component {
       textAreaState: this.props.start || false,
       autorEdit: this.props.start || false,
       textEdited: false,
-      textAreaVal: ''
+      textAreaVal: '',
+      textAreaErr: false
     };
     this.textArea = React.createRef();
   }
 
   handleTextChange = event => {
     if (this.state.textAreaVal.length < 300) {
-      this.setState({ textAreaVal: event.target.value });
+      this.setState({ 
+        textAreaVal: event.target.value,
+        textAreaErr: false 
+      });
     } else {
       this.setState({
-        textAreaVal: event.target.value.slice(0, event.target.value.length - 1)
+        textAreaVal: event.target.value.slice(0, event.target.value.length - 1),
+        
       });
     }
     if (this.state.textAreaVal.length > 2 && this.state.textAreaState) {
-      this.setState({ textEdited: true });
+      this.setState({ 
+        textEdited: true,
+        textAreaErr: false 
+      });
     } else {
       this.setState({ textEdited: false });
+    }
+    if (this.state.textAreaVal.length <= 2 || this.state.textAreaVal.length >= 300 ){
+      this.setState({
+        textAreaErr: true
+      });
     }
   };
 
@@ -165,7 +178,7 @@ class Component extends React.Component {
                   if copy\paste
                 */}
                 <textarea
-                  className="reply-text"
+                  className= 'reply-text'
                   placeholder="Write a response..."
                   value={this.state.textAreaVal}
                   onChange={this.handleTextChange}
@@ -176,7 +189,7 @@ class Component extends React.Component {
                     e.target.value = val;
                   }}
                 />
-                <span className="calcChar">
+                <span className={`calcChar ${this.state.textAreaErr && 'calcChar_red'} `}>
                   {this.state.textAreaVal.length} of 300
                 </span>
               </div>

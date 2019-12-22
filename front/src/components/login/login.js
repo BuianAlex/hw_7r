@@ -3,8 +3,8 @@ import './login.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TextField from './textFild';
 import { userRegister, userLogIn } from '../../services/api.js';
+import '../../services/inputValidate';
 import Spiner from '../spiner/spiner';
-
 import {
   faReply,
   faEdit,
@@ -12,6 +12,7 @@ import {
   faSave,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
+console.log("sdss".maxLength(1));
 
 class Login extends React.Component {
   constructor() {
@@ -125,6 +126,8 @@ class Login extends React.Component {
       }
 
       if (e.target.name === 'phone') {
+        const addPlus = "+";
+
         this.setState({ phoneFild: e.target.value });
         if (/38[0-9]{10,}/.test(e.target.value)) {
           this.setState({ errPhoneFild: '' });

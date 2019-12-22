@@ -14,8 +14,6 @@ class Footer extends React.Component {
   
    
   render() {
-    console.log(this.props.map);
-    
     return (
       <footer id="contacts" className="footer">
         <div className="container flex-wrap">
@@ -51,7 +49,7 @@ class Footer extends React.Component {
           </div>
           <div className="col-3">
             <div className="map">
-              <Map center={{ lat: 33.765571, lng: -118.189348 }} key={this.props.map}></Map>
+              <Map center={{ lat: 33.765571, lng: -118.189348 }} ></Map>
             </div>
           </div>
         </div>

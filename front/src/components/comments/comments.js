@@ -7,7 +7,7 @@ import {
   deleteComment,
   putComment
 } from '../../services/api.js';
-import {getLocalUser, remLocalUser} from '../../services/localStor'
+import {getLocalUser, removeLocalUser} from '../../services/localStorage'
 import Spiner from '../spiner/spiner';
 import Login from '../login/login';
 
@@ -32,11 +32,10 @@ class Comments extends React.Component {
       },
       commentData: []
     };
-    this.actionDelete = this.actionDelete.bind(this);
   }
 
-  nestedComment(data) {
-    const toRender = data.map(item => {
+  nestedComment=(data)=> {
+    return data.map(item => {
       if (item.children.length === 0) {
         return (
           <Item
@@ -60,13 +59,12 @@ class Comments extends React.Component {
         </Item>
       );
     });
-    return toRender;
   }
 
   actionSave = async (id, text, parent, edited) => {
     if (this.state.userLogin) {
       const autorID = this.state.userLogin.id;
-      const resData = {};
+      let resData = {};
       this.setState({ spinerState: true });
       if (edited && id !== 0) {
         // TODO: putComments
@@ -86,7 +84,7 @@ class Comments extends React.Component {
     }
   };
 
-  async actionDelete(id) {
+  actionDelete = async (id)=> {
     const resData = await deleteComment(id);
     if (!resData.error) {
       const resData = await getComments();
@@ -100,11 +98,10 @@ class Comments extends React.Component {
         spinerState: false, 
         errors: resData.error
       });
-
     }
   }
 
-  async componentDidMount() {
+  componentDidMount = async ()=> {
     const resData = await getComments();
     this.setState({ 
       spinerState: false, 
@@ -113,11 +110,9 @@ class Comments extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate = (prevProps, prevState, snapshot)=> {
     if (prevState.loginPopup !== this.state.loginPopup) {
       const isUser = getLocalUser();
-      console.log(isUser);
-      
       if (isUser) {
         this.setState({
           userLogin: isUser,
@@ -131,7 +126,7 @@ class Comments extends React.Component {
   };
 
   actionLogOut = () => {
-    remLocalUser(); 
+    removeLocalUser(); 
     this.setState({ userLogin: false });
     // TODO: req to server
   };
@@ -207,4 +202,5 @@ class Comments extends React.Component {
     );
   }
 }
+
 export default Comments;
