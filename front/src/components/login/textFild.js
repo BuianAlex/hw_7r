@@ -11,6 +11,7 @@ export default class TextFild extends React.Component {
             type={this.props.type}
             className={this.props.classes}
             onChange={this.props.onChangeFild}
+            onBlur={this.props.onBlur}
             value={this.props.value}
             name={this.props.name}
           />

@@ -24,7 +24,7 @@ class App extends React.Component {
         <Team teamData={this.data.team}/>
         <Clients clientsData={this.data.clients}/> 
         <Comments/>
-        <Footer map={this.data.gmKey}/>
+          <Footer map={this.data.gmKey}/>
       </div>
     );
   }
