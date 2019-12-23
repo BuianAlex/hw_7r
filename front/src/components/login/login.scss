@@ -6,7 +6,6 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.562);
   z-index: 100;
-  cursor: pointer;
 }
 .dialog {
   position: fixed;
@@ -24,7 +23,6 @@
   overflow: hidden;
   overflow-y: scroll;
   z-index: 300;
-  //TODO: for mobile
 }
 .header {
   display: flex;
